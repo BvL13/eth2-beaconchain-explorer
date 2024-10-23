@@ -583,6 +583,9 @@ func StripeWebhook(w http.ResponseWriter, r *http.Request) {
 
 		if invoice.Subscription != nil {
 			logger.Infof("DEBUG invoice subscription: %+v", *invoice.Subscription)
+			for i, d := range invoice.Lines.Data {
+				logger.Infof("DEBUG invoice lines data[%v]: %+v", i, *d)
+			}
 		}
 
 		if utils.GetPurchaseGroup(invoice.Lines.Data[0].Price.ID) == utils.GROUP_MOBILE || utils.GetPurchaseGroup(invoice.Lines.Data[0].Price.ID) == utils.GROUP_ADDON {
